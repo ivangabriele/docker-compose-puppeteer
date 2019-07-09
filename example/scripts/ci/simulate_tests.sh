@@ -4,7 +4,6 @@
 # https://docs.docker.com/compose/networking/
 # https://docs.docker.com/compose/environment-variables/#the-env-file
 export API_HOST=api
-docker-compose config
 
 # Build all the docker-compose services:
 docker-compose build --no-cache
