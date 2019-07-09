@@ -36,7 +36,7 @@ The most important files are:
 
 and here is how to simulate the CI run locally:
 
-- [CI simulation script](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/scripts/ci/simulate_tests.sh)
+- [CI simulation script](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/example/scripts/ci/simulate_tests.sh)
 
 ### Gitlab CI
 
