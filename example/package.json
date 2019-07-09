@@ -1,0 +1,16 @@
+{
+  "name": "docker-compose-puppeteer-test",
+  "description": "Docker Compose Puppeteer example project.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test:e2e": "cucumber-js"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "cucumber": "^5.1.0",
+    "dotenv": "^8.0.0",
+    "puppeteer": "^1.18.1"
+  }
+}
