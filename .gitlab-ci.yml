@@ -1,0 +1,28 @@
+stages:
+  - Test
+
+E2E Tests:
+  stage: Test
+  image: igabriele/docker-compose-puppeteer
+  # We both need to add the docker:dind service and the DOCKER_DRIVER + DOCKER_HOST variables to use docker-in-docker:
+  # https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-executor
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://docker:2375
+  before_script:
+    # This is only useful because the example project is in a subdirectory.
+    # The example content should be at the root in a normal project:
+    - cd example
+    # Override the .env variable (because localhost is not available within the container):
+    # https://docs.docker.com/compose/networking/
+    # https://docs.docker.com/compose/environment-variables/#the-env-file
+    - export API_HOST=api
+    # Build all the docker-compose services:
+    - docker-compose build
+  script:
+    # Launch the e2e tests:
+    - docker-compose up --abort-on-container-exit --exit-code-from test test
+  after_script:
+    - docker-compose stop
