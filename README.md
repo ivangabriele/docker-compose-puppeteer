@@ -9,8 +9,8 @@ A Docker image based on Debian including:
 
 ## Why
 
-This is mostly useful for CI e2e tests like Gitlab CI or Travis, supposing that you handle your bundles (api, client,
-databases, etc) via Docker Compose.
+This is mostly useful for CI e2e tests like Gitlab CI, supposing that you handle your bundles (api, client, databases,
+etc) via Docker Compose.
 
 ## Get started
 
@@ -18,7 +18,10 @@ databases, etc) via Docker Compose.
 
 - You must include `puppeteer` as a dependency in your package.json.
 - The root project files mst be copied into the `/app` directory which is used as the container working directory.
-- You must user []()
+- Your default username is `pptruser` and you should both be able to run Docker commands as non-root as well as running
+puppeteer without the `--no-sandbox` option.
+- You must use [dind](https://hub.docker.com/_/docker#start-a-daemon-instance) in order to access the host Docker daemon
+whithin the container.
 
 ### Locally
 
