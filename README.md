@@ -9,37 +9,59 @@ A Docker image based on Debian including:
 
 ## Why
 
-This is mostly useful for CI e2e tests like Gitlab CI, supposing that you handle your bundles (api, client, databases,
-etc) via Docker Compose.
+This is mostly useful to highly increase the speed of your CI runs as well as reducing the pain configuring them,
+supposing that you are used to handle your bundles (api, client, databases, etc) via docker-compose.
 
 ## Get started
 
 **This docker image has a few important requirements:**
 
-- You must include `puppeteer` as a dependency in your package.json.
-- The root project files mst be copied into the `/app` directory which is used as the container working directory.
+- The project files must be copied whithin the `/app` directory whithin your e2e test container which is used as the
+default working directory.
 - Your default username is `pptruser` and you should both be able to run Docker commands as non-root as well as running
 puppeteer without the `--no-sandbox` option.
 - You must use [dind](https://hub.docker.com/_/docker#start-a-daemon-instance) in order to access the host Docker daemon
 whithin the container.
 
-### Locally
+### Example
 
-Please [read this](https://hub.docker.com/_/docker#start-a-daemon-instance).
+**To understand how to integrate this image whithin your CI and avoid most caveats, I strongly advise you to check [the
+example project files](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/example).
+
+The most important files are:
+
+- [Gitlab CI config](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/.gitlab-ci.yml)
+- [Docker Compose config](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/example/docker-compose.yml)
+- [Test Dockerfile](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/example/test.Dockerfile)
+
+and here is how to simulate the CI run locally:
+
+- [CI simulation script](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/scripts/ci/simulate_tests.sh)
 
 ### Gitlab CI
 
-Don't forget to add these lines whithin your configuration file:
+Don't forget to add these lines whithin your configuration file in order to
+[enable the docker-in-docker features](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-executor):
 
 **.gitlab-ci.yml**
 
 ```
+  image: igabriele/docker-compose-puppeteer
   services:
     - docker:dind
   variables:
-    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: tcp://docker:2375
 ```
 
+Check [the example project configuration](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/.gitlab-ci.yml)
+to get some inspiration.
+
+### Travis CI
+
+_In progress…_
+
+<!--
 ## Versions
 
 ### latest
@@ -53,3 +75,4 @@ the Github repository.
 - docker-compose v1.24.1
 - node.js v10.16.0
 - Yarn v1.16.0
+-->
