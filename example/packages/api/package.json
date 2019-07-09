@@ -1,0 +1,21 @@
+{
+  "name": "docker-compose-puppeteer-example-api",
+  "description": "Docker Compose Puppeteer example project.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node ./.koa",
+    "build": "cross-env NODE_ENV=production babel ./src -d ./.koa -s"
+  },
+  "dependencies": {
+    "@koa/cors": "2",
+    "koa": "^2.7.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.2",
+    "cross-env": "^5.2.0"
+  }
+}
