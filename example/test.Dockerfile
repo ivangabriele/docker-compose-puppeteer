@@ -1,4 +1,4 @@
-# This image does only exist to simulate the CI run locally, you may not need it whithin your project:
+# This image is used by to run the e2e test on the CI or simulate the CI run locally.
 
 FROM igabriele/docker-compose-puppeteer
 
