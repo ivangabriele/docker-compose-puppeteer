@@ -60,17 +60,4 @@ RUN apt-get install -qq \
 
 WORKDIR /app
 
-# Install puppeteer so it's available in the container.
-RUN npm i --loglevel error --no-save puppeteer \
-    # Add user so we don't need --no-sandbox.
-    # same layer as npm install to keep re-chowned files from using up several hundred MBs more space
-    && groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
-    && mkdir -p /home/pptruser/Downloads \
-    && chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /app/node_modules
-
 CMD ["google-chrome-unstable"]
-
-# Allow pptruser user to manage Docker as a non-root user
-# https://docs.docker.com/install/linux/linux-postinstall/
-RUN usermod -aG docker pptruser
