@@ -58,9 +58,6 @@ RUN apt-get install -qq \
       > /dev/nul \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Yarn
-RUN npm i -g yarn
-
 WORKDIR /app
 
 # Install puppeteer so it's available in the container.
