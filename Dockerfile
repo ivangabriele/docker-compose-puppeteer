@@ -77,6 +77,3 @@ CMD ["google-chrome-unstable"]
 # Allow pptruser user to manage Docker as a non-root user
 # https://docs.docker.com/install/linux/linux-postinstall/
 RUN usermod -aG docker pptruser
-
-# Run everything after as non-privileged user.
-USER pptruser
