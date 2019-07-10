@@ -1,11 +1,12 @@
 # Docker Compose Puppeteer
 
 A Docker image based on Debian including:
-- Docker
-- Docker Compose
-- node.js
-- Yarn
-- puppeteer
+- **Docker**
+- **Docker Compose
+- **puppeteer** (locally in `/app`)
+- **node.js**
+- **npx** (globally)
+- **Yarn** (globally)
 
 ## Why
 
@@ -18,15 +19,15 @@ supposing that you are used to handle your bundles (api, client, databases, etc)
 
 - The project files must be copied whithin the `/app` directory whithin your e2e test container which is used as the
 default working directory.
-- Your default username is `pptruser` and you should both be able to run Docker commands as non-root as well as running
-puppeteer without the `--no-sandbox` option.
 - You must use [dind](https://hub.docker.com/_/docker#start-a-daemon-instance) in order to access the host Docker daemon
 whithin the container.
+- You must use the launch puppeteer with these arguments:
+`puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })`.
 
 ### Example
 
-**To understand how to integrate this image whithin your CI and avoid most caveats, I strongly advise you to check [the
-example project files](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/example).
+**In order to understand how to integrate this image whithin your CI and avoid most caveats, I strongly advise you to
+check [the example project files](https://github.com/ivangabriele/docker-compose-puppeteer/blob/master/example).**
 
 The most important files are:
 
